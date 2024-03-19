@@ -39,60 +39,20 @@ for entity in ldaca.crate.contextual_entities + ldaca.crate.data_entities:
 
 # Types of PRIMARY_OBJECTs ie [PRIMARY_OBJECT, X]. What kinds of Xs do we have?
 for entity in ldaca.crate.data_entities:
-    #print(entity.id,entity.type)  #debug check
     if 'File' in as_list(entity.type):
         print(entity.get('name'))
-        #print(entity.get('@id'))
-        #ldaca.download_file(entity.id, entity.id.split('&path=')[1],DOWNLOAD_DIR) #.replace('/','_'))
-        #print(entity.id.split('&path=')[1])
+        ldaca.download_file(entity.id, entity.id.split('&path=')[1],DOWNLOAD_DIR) #.replace('/','_'))
 
 #before zipping, make an ro-crate file, python library, save the ro-crate. write ro-crate into downloaded_data ro-crate-metadata.json
 #where to find the ro-crate-metadata.json
-#ldaca.crate.write_zip('ro-crate-metadata.json.zip')
+ldaca.crate.write('downloaded_data')
 for e in ldaca.crate.get_entities():
     if 'File' in as_list(e.type):
         print(e.get('@id'))
-#    if e["@id"] == "arcp://name,farms-to-freeways-example-dataset":
-#        print(e)
-with open('downloaded_data/ro-crate-metadata.json', 'w') as f:
-    json.dump(ldaca.crate.metadata.generate(), f)
 
 # Create a zip file from the directory
 import zipfile
 import shutil
-shutil.make_archive(base_name='downloaded_data_zipped', format='zip', root_dir='downloaded_data')
+shutil.make_archive(base_name='downloaded_data', format='zip', root_dir='downloaded_data')
 
 #add command to delete downloaded_data
-
-#files.add(file)
-"""
-# Create a directory - option 1
-from pathlib import Path
-cwd = Path.cwd()
-joined_path = cwd / 'downloaded_data'
-joined_path.mkdir(exist_ok=True) #exist_ok to ignore file exists error if target directory already exists
-
-# Create a directory - option 2
-# Make a relative directory path for files to be downloaded into
-from pathlib import Path
-# Construct the path to the directory
-directory_path = Path(r"downloaded_data")
-# Make the directory by calling mkdir() on the path instance
-directory_path.mkdir()
-# Report the result
-print(f"Successfully made the '{directory_path}' directory.")
-
-
-# Create a zip file from a directory
-
-from zipfile import ZipFile, ZIP_DEFLATED
-import pathlib
-
-zip_path = './downloaded_data.zip'
-
-folder = pathlib.Path(DOWNLOAD_DIR)
-
-with ZipFile(zip_path, 'w', ZIP_DEFLATED) as zip:
-    for file in folder.iterdir():
-        zip.write(file) # change to (file, arcname=file.name) if you want the zip to open the files directly rather than going to a downloaded_data folder first
-"""
