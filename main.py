@@ -9,8 +9,8 @@ from rocrate_lang.utils import as_list # A handy utility for converting to list
 
 # Specify the path to the collections as well as the LDaCA API and require an API token
 # Specify location where collection is
-LDACA_API = 'https://data.atap.edu.au/api'
-COLLECTION_ID = 'arcp://name,farms-to-freeways-example-dataset'
+LDACA_API = 'https://data.ldaca.edu.au/api'
+COLLECTION_ID = 'arcp://name,doi10.4225%2F35%2F555d661071c76'
 DOWNLOAD_DIR = 'downloaded_data'
 from dotenv import load_dotenv    # Loads environment variables
 load_dotenv('vars.env') # Load the environment variables located in the vars.env files
@@ -40,7 +40,7 @@ for entity in ldaca.crate.contextual_entities + ldaca.crate.data_entities:
 # Types of PRIMARY_OBJECTs ie [PRIMARY_OBJECT, X]. What kinds of Xs do we have?
 for entity in ldaca.crate.data_entities:
     if 'File' in as_list(entity.type):
-        print(entity.get('name'))
+        print(f"entity id: {entity.get('@id')}")
         ldaca.download_file(entity.id, entity.id.split('&path=')[1],DOWNLOAD_DIR) #.replace('/','_'))
 
 #before zipping, make an ro-crate file, python library, save the ro-crate. write ro-crate into downloaded_data ro-crate-metadata.json
