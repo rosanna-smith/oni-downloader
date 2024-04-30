@@ -7,7 +7,7 @@ load_dotenv('vars.env')
 API_TOKEN = os.getenv('API_KEY')
 URL = 'https://data.ldaca.edu.au/api'
 COLLECTION = os.getenv('COLLECTION')
-print(f"URL: {URL}")
+print(f"URL: {URL}, COLLECTION: {COLLECTION}")
 
 data_dir = 'oni_data'
 ldaca = LDaCA(url=URL, token=API_TOKEN, data_dir=data_dir)
