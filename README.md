@@ -4,7 +4,7 @@ This downloader uses the Oni API to allow you to select (coming soon) and downlo
 
 ## Load a Virtual Environment
 
-#### Create the virtual environment space in your current directory by running the followibng Terminal command:
+#### Create the virtual environment space in your current directory by running the following Terminal command:
 python -m venv venv
 
 This will create the folder venv/
@@ -34,7 +34,9 @@ API_KEY=153b2db8-4536-4016-8bd6-311e8817e764
 
 ## Enter the collection in vars.env
 
-Edit the vars.env file and add the collection you want to download in COLLECTION. The collection ID is available from https://data.ldaca.edu.au under the @id on a collection page of your choice.
+Copy a collection @id from https://data.ldaca.edu.au - this is available on any collection page of your choice under the @id section. Add the collection to the vars.env file. An example is shown below of the required format.
+
+COLLECTION='arcp://name,doi10.4225%2F35%2F555d661071c76'
 
 ## To run script
 
